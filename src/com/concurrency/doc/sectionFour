@@ -1,0 +1,25 @@
+1.锁的优化
+    1.1 减少锁的持有时间。 jdk的pattern类的match方法就使用这种策略。
+    1.2 减小锁粒度     ConcurrentHashMap的size()方法
+    1.3 读写分离锁替代独占锁   ReadWriteLock    ConcurrentHashMap中使用读写锁提高性能
+         使用在读多写少的场合。
+    1.4 锁分离                 ReentrantLock 和 Condition
+      LinkedBlockingQueue   代码中的锁分离：
+          private final ReentrantLock takeLock = new ReentrantLock(); //读锁
+          private final Condition notEmpty = takeLock.newCondition(); //条件非空
+          private final ReentrantLock putLock = new ReentrantLock(); //写锁
+          private final Condition notFull = putLock.newCondition();  //非满
+         读锁之间竞争   写锁之间竞争  互不干扰
+    1.5 锁粗化  为了尽可能的减少持有锁的时间，虚拟机在遇到一连串的对同一个锁的请求和释放操作时，会整合成一次请求，从而减少同步次数。这种操作叫锁粗化。
+
+2.java虚拟机对锁做的优化：
+  2.1 锁偏向    当一个线程获得锁以后，锁的模式变为偏向模式，再次锁请求的时候不需要做任何同步操作。 节省锁请求操作，提升性能。
+  2.2 轻量级锁  将对象头部作为指针 指向持有锁的线程的堆栈的内部，如果获得轻量锁成功则顺利进入临界区。否则上升为重量级锁。
+  2.3 自旋锁    上升为重量锁以后 ，虚拟机并不会马上挂起线程，而是做自旋操作尝试获得锁，如果多次尝试不成功则挂起。
+  2.4 锁消除   虚拟机对运行上下文的扫描，去除不可能存在共享资源竞争的锁。 节约无意义的请求锁时间。再-server模式下 -XX：+DoEscapeAnalysis参数
+  打开逃逸分析    -XX：+EliminateLocks  打开锁消除。
+      锁消除是基于逃逸分析的。   观察一个变量是否会逃出某一个作用域，如果没有，虚拟机会去除作用域内的不必要的锁。
+  以上是通过控制资源的访问来优化锁，还可以通过增加资源来保证所有对象的线程安全。
+
+  ThreadLocal   将一个非线程安全的共享对象变成线程私有的对象，不在线程间共享，从而在应用层面保证线程安全。
+  ThreadLocal是如何保证对象只被当前线程使用的呢？主要秘密在get() 和 set() 方法里边。
