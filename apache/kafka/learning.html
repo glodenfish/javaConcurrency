@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  .center {
+    text-align: center;
+  }
+
+  .red {
+    font-style: normal;
+    color: #ff0000;
+  }
+</style>
+<head>
+  <meta charset="UTF-8">
+  <title>apache</title>
+</head>
+<body>
+<p class="center"><img src="无标题.png"/></p>
+<ul>
+  <li>简介：apache kafka这本书是2013.11第一次出版，由 Packt Publishing Ltd.出品，必属精品 作者 nishent garg</li>
+  <li>作者java技术栈
+    <ul>
+      <li>Java Enterprise Edition</li>
+      <li>Spring</li>
+      <li>Hibernate</li>
+      <li>Hadoop</li>
+      <li>Hive</li>
+      <li>Flume</li>
+      <li>Sqoop</li>
+      <li>Oozie</li>
+      <li>Spark</li>
+      <li>Kafka</li>
+      <li>Storm</li>
+      <li>Mahout</li>
+      <li>Solr/Lucene</li>
+    </ul>
+  </li>
+  <li> 数据库技术栈
+    <ul>
+      <li>MongoDB</li>
+      <li>CouchDB</li>
+      <li>HBase</li>
+      <li>Cassandra</li>
+    </ul>
+  </li>
+  <li>
+    mpp数据库
+    <ul>
+      <li>GreenPlum</li>
+      <li>Vertica</li>
+    </ul>
+  </li>
+  <li>可以查看更多书籍在<a href="https://www.PacktPub.com">www.PacktPub.com</a></li>
+  <li>第一章</li>
+    <ul>
+      <li>kafka简介<em>kafka 是一个开源的，分布式的发布订阅消息系统.设计有如下的一些特征：
+          <ul>
+            <li>持久化消息</li>
+        <p class="red">为了从大数据中获得真实价值，任何形式的信息丢失都是负担不起的。
+          Apache Kafka被设计成常量时间性能，时间复杂度为O(1)的磁盘结构，甚至是达到TB级别的大容量消息存储。
+        </p>
+    </ul>
+    <ul>
+      <li>高吞吐量</li>
+      <p class="red">考虑到大数据，Kafka被设计成工作在每秒支持数百万条消息的商用硬件上。
+      </p>
+    </ul>
+    <ul>
+      <li>分布式</li>
+      <p class="red">Apache Kafka明确地支持在Kafka服务器上对消息进行分区
+        ，在维护每个分区排序语义的同时，为一个消费者集群上分配消费。
+      </p>
+    </ul>
+    <ul>
+      <li>支持多客户端</li>
+      <p class="red">Apache Kafka系统支持简单的集成来自不同平台的客户端，如Java、。NET、PHP、Ruby和Python。
+      </p></ul>
+    <ul>
+      <li>实时性</li>
+      <p class="red">生产者线程生成的消息可以立即对消费者线程可见;这个特性对于基于事件的系统非常重要
+        作为复杂事件处理(CEP)系统。
+      </p></ul>
+  Apache Kafka提供了一个实时的发布-订阅解决方案，它克服了实时数据消费应用，以及按数量级增长的数据量
+  ，不断增大的真实数据的挑战。Kafka也支持Hadoop系统中的并行数据加载。
+    下图显示了一个典型的Apache Kafka消息传递系统支持的大数据聚合和分析场景
+    </em>
+    <p><img src="kafka.png"></p>
+      在生产方面，有不同类型的生产者，如以下:
+      <ul>
+          <li>前端web应用程序生成应用程序日志(Frontend web applications)</li>
+          <li>生成web分析日志的生产者代理(Producer proxies)</li>
+          <li>生成转换日志的生产者适配器(Producer adapter)</li>
+          <li>生成调用跟踪日志的生产者服务(Producer services)</li>
+        </ul>
+        在消费方面，有不同种类的消费者，如以下:
+        <ul>
+          <li>脱机消费者使用消息并将其存储在Hadoop或传统数据仓库中进行脱机分析</li>
+          <li>接近实时的消费者，他们消费消息，并将其存储在任何NoSQL数据存储中，如HBase或Cassandra，以进行实时分析。</li>
+          <li>实时消费者，在内存数据库中过滤消息，并为相关组触发告警事件</li>
+        </ul>
+</ul>
+    <ul>
+      <li>kafka的必要性</li>
+    大量的数据是由具有任何形式的基于web的存在和活动的公司产生的。数据是这些基于互联网的系统中较新的成分之一，通常包括与登录相关的用户活动事件
+    访问、点击、社交网络活动，如"赞"、"分享"、"评论"、"操作"和"系统度量"。这些数据通常是通过日志记录来处理的。
+    传统的日志聚合解决方案，因为高吞吐量(每秒数百万个消息)。这些传统的解决方案是提供日志记录的可行方案
+    数据到像Hadoop这样的离线分析系统。然而，解决方案对于构建实时处理系统是非常有限的.
+      <hr/>
+    根据互联网应用的新趋势，活动数据已经成为生产数据的一部分，并被用于实时分析数据。这些分析可以:
+      <ul>
+        <li>基于相关性的搜索</li>
+        <li>基于受欢迎程度、共同发生或情感分析的推荐</li>
+        <li>向大众投放广告</li>
+        <li>来自垃圾邮件或未经授权的数据抓取的Internet应用程序安全性</li>
+      </ul>
+      <hr/>
+    从生产系统中收集的这些多组数据的实时应用,由于收集和处理的数据量，已经成为一个挑战。
+    <p>Apache Kafka的目标是在Hadoop系统中提供一种并行负载机制，以及在一组机器上划分实时消耗的能力，从而统一脱机和在线处理。
+      kafka可以与 Scribe 或者 Flume 进行比较，因为它对处理活动流数据很有用;但是从建筑的角度来看，
+      它更接近于传统的消息传递系统，如ActiveMQ或RabitMQ。</p>
+    </ul>
+  </ul>
+</body>
+</html>
